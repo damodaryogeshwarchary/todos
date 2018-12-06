@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var todosRouter = require('./routes/todos');
@@ -24,8 +25,8 @@ app.use('/api', indexRouter);
 app.use('/api/todos', todosRouter);
 
 // TODO: See why it is not working
-app.use("*", function(req, resp) {
-  resp.sendFile("/public/demo/dist/demo/index.html");
+app.use('*', function(req, resp) {
+  resp.sendFile('/public/demo/dist/demo/index.html');
 });
 
 // catch 404 and forward to error handler
