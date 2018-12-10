@@ -4,27 +4,27 @@ var router = express.Router();
 var todos = [
   {
     id: 501,
-    idArchived: true,
+    idArchived: false,
     todo: 'damodar',
-    isCompleted: true
+    isCompleted: false
   },
   {
     id: 502,
-    idArchived: true,
+    idArchived: false,
     todo: 'yogeshwar',
-    isCompleted: true
+    isCompleted: false
   },
   {
     id: 503,
-    idArchived: true,
+    idArchived: false,
     todo: 'chary',
-    isCompleted: true
+    isCompleted: false
   },
   {
     id: 504,
-    idArchived: true,
+    idArchived: false,
     todo: 'chary yogi',
-    isCompleted: true
+    isCompleted: false
   }
 ];
 
@@ -75,7 +75,7 @@ router.post('/add', function(req, res) {
 router.delete('/delete/:id', function(req, res) {
   console.log(req.params.id);
   for (i = 0; i < todos.length; i++) {
-    if (todos[i].id == req.params.id) {
+    if (todos[i].id === Number(req.params.id)) {
       todos.splice(i, 1);
       // console.log(todos.splice(i, 1));
       console.log(req.params.id);
@@ -84,4 +84,35 @@ router.delete('/delete/:id', function(req, res) {
     }
   }
 });
+
+router.put('/archive/:id', function(req, res) {
+  console.log(req.params.id);
+  for (i = 0; i < todos.length; i++) {
+    if (todos[i].id === Number(req.params.id)) {
+      todos[i].idArchived = true;
+      res.json(req.params.id);
+    }
+  }
+});
+
+router.put('/edit/:id', function(req, res) {
+  console.log(req.params.id);
+  for (i = 0; i < todos.length; i++) {
+    if (todos[i].id === Number(req.params.id)) {
+      todos[i].todo = req.body.todo;
+      console.log(req.body);
+      res.json([req.params.id, req.body.todo]);
+    }
+  }
+});
+
+// router.delete('/complete/:id', function(req, res) {
+//   console.log(req.params.id);
+//   for (i = 0; i < todos.length; i++) {
+//     if (todos[i].id == req.params.id) {
+//       todos[i].isCompleted = true;
+//       res.json(req.params.id);
+//     }
+//   }
+// });
 module.exports = router;
