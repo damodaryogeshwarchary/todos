@@ -1,38 +1,38 @@
 var express = require('express');
 var router = express.Router();
 
-// var todos = [
-//   {
-//     id: 501,
-//     idArchived: true,
-//     todo: 'damodar',
-//     isCompleted: true
-//   },
-//   {
-//     id: 502,
-//     idArchived: true,
-//     todo: 'yogeshwar',
-//     isCompleted: true
-//   },
-//   {
-//     id: 503,
-//     idArchived: true,
-//     todo: 'chary',
-//     isCompleted: true
-//   },
-//   {
-//     id: 504,
-//     idArchived: true,
-//     todo: 'chary yogi',
-//     isCompleted: true
-//   }
-// ];
+var todos = [
+  {
+    id: 501,
+    idArchived: true,
+    todo: 'damodar',
+    isCompleted: true
+  },
+  {
+    id: 502,
+    idArchived: true,
+    todo: 'yogeshwar',
+    isCompleted: true
+  },
+  {
+    id: 503,
+    idArchived: true,
+    todo: 'chary',
+    isCompleted: true
+  },
+  {
+    id: 504,
+    idArchived: true,
+    todo: 'chary yogi',
+    isCompleted: true
+  }
+];
 
-var todos = [];
+// var todos = [];
 
 function getNextId(array) {
   let maxArray = [];
-  if (array.length >= 1) {
+  if (array.length > 0) {
     for (i = 0; i < array.length; i++) {
       maxArray[i] = array[i].id;
     }
@@ -40,7 +40,7 @@ function getNextId(array) {
     console.log(maxValue);
     return maxValue + 1;
   } else {
-    return 1;
+    return 501;
   }
 }
 // var maxArray = [];
@@ -77,10 +77,11 @@ router.delete('/delete/:id', function(req, res) {
   for (i = 0; i < todos.length; i++) {
     if (todos[i].id == req.params.id) {
       todos.splice(i, 1);
-      console.log(todos.splice(i, 1));
+      // console.log(todos.splice(i, 1));
+      console.log(req.params.id);
       res.json(req.params.id);
+      console.log(todos);
     }
   }
 });
-
 module.exports = router;
